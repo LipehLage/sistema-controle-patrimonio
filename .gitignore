@@ -1,0 +1,24 @@
+# Arquivos de log e compilados
+*.log
+target/
+dist/
+
+# Arquivos de dependências (que podem ser reinstaladas)
+node_modules/
+
+# Arquivos de IDEs
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# Arquivos do macOS
+.DS_Store
+
+# Arquivos de build do sistema operacional
+*~
+*.swp
+
+# Arquivos de senhas ou variáveis de ambiente
+.env

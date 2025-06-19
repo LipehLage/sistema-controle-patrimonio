@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres_db
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=asset_control
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: keycloak_sso
+    command: start-dev
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+      - KC_DB=postgres
+      - KC_DB_URL_HOST=postgres
+      - KC_DB_URL_DATABASE=asset_control
+      - KC_DB_USERNAME=admin
+      - KC_DB_PASSWORD=admin
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+
+  backend:
+    image: asset-control-backend:latest
+    container_name: backend_api
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/asset_control
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=admin
+      - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=http://keycloak:8080/realms/asset-control-realm
+    depends_on:
+      - postgres
+      - keycloak
+
+  frontend:
+    image: asset-control-frontend:latest
+    container_name: frontend_ui
+    ports:
+      - "8082:80"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
+
