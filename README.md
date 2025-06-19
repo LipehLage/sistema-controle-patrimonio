@@ -76,6 +76,7 @@ Com o Docker e o Docker Compose instalados, o ambiente completo pode ser iniciad
 Após iniciar o ambiente com `docker-compose up`, os serviços estarão acessíveis nas seguintes URLs:
 
 * **Aplicação Frontend:** [http://localhost:8082](http://localhost:8082)
+* **Documentação da API (Swagger UI):** [http://localhost:8081/swagger-ui.html](http://localhost:8081/swagger-ui.html)
 * **Console de Administração do Keycloak:** [http://localhost:8080](http://localhost:8080)
 * **API Backend (Base URL):** `http://localhost:8081`
 

@@ -27,7 +27,7 @@ public class SecurityConfig {
         http
                 .cors(cors -> cors.configurationSource(request -> {
                     CorsConfiguration configuration = new CorsConfiguration();
-                    configuration.setAllowedOrigins(List.of("http://localhost:8082")); // Certifique-se que esta porta está correta
+                    configuration.setAllowedOrigins(List.of("http://localhost:8082"));
                     configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
                     configuration.setAllowedHeaders(List.of("*"));
                     configuration.setAllowCredentials(true);
@@ -36,19 +36,18 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-                                // Equipments
+                                .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs", "/v3/api-docs/**").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/api/v1/equipments").hasRole("ADMIN")
                                 .requestMatchers(HttpMethod.PUT, "/api/v1/equipments/**").hasRole("ADMIN")
                                 .requestMatchers(HttpMethod.DELETE, "/api/v1/equipments/**").hasRole("ADMIN")
                                 .requestMatchers(HttpMethod.GET, "/api/v1/equipments", "/api/v1/equipments/**").hasAnyRole("ADMIN", "USER")
-                                // Users
                                 .requestMatchers(HttpMethod.POST, "/api/v1/users").hasRole("ADMIN")
                                 .requestMatchers(HttpMethod.PUT, "/api/v1/users/**").hasRole("ADMIN")
                                 .requestMatchers(HttpMethod.DELETE, "/api/v1/users/**").hasRole("ADMIN")
                                 .requestMatchers(HttpMethod.GET, "/api/v1/users", "/api/v1/users/**").hasAnyRole("ADMIN", "USER")
-                                // Movements
                                 .requestMatchers(HttpMethod.POST, "/api/v1/movements/register").hasAnyRole("ADMIN", "USER")
                                 .requestMatchers(HttpMethod.GET, "/api/v1/movements").hasAnyRole("ADMIN", "USER")
+                                .requestMatchers(HttpMethod.GET, "/api/v1/movements/{id}/term").hasAnyRole("ADMIN", "USER")
                                 .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
