@@ -8,10 +8,12 @@ Este projeto é um sistema web completo (SaaS - Software as a Service) para gere
 
 ## ✨ Funcionalidades Principais
 
-* **Gerenciamento de Equipamentos:** CRUD completo (Criar, Ler, Atualizar, Deletar) para os ativos de TI. 
-* [cite_start]**Gerenciamento de Usuários:** CRUD completo para os funcionários/usuários da aplicação. 
-* [cite_start]**Controle de Movimentações:** Registro de entrada (devolução) e saída (alocação, reparo) de equipamentos, vinculando um equipamento a um usuário. 
-* [cite_start]**Geração de Termos:** Emissão de um Termo de Responsabilidade em PDF para cada movimentação. 
+* **Gerenciamento de Equipamentos:** CRUD completo (Criar, Ler, Atualizar, Deletar) para os ativos de TI.
+* **Gerenciamento de Usuários:** CRUD completo para os funcionários/usuários da aplicação.
+* **Controle de Movimentações:** Registro de entrada (devolução) e saída (alocação, reparo) de equipamentos, vinculando um equipamento a um usuário.
+* **Geração de Termos:** Emissão de um Termo de Responsabilidade em PDF para cada movimentação.
+* **Relatórios:** Visualização de equipamentos por status (Disponível, Em Reparo) e por usuário alocado.
+* **Autenticação e Autorização:** Sistema de segurança robusto com Single Sign-On (SSO) via Keycloak, com controle de acesso baseado em perfis (Admin vs. Usuário).
 
 ---
 
@@ -19,10 +21,10 @@ Este projeto é um sistema web completo (SaaS - Software as a Service) para gere
 
 O sistema é construído sobre uma arquitetura de microsserviços e contêineres, utilizando as seguintes tecnologias:
 
-* [cite_start]**Backend:** Java (Spring Boot) 
-* [cite_start]**Frontend:** Vue.js 
-* [cite_start]**Banco de Dados:** PostgreSQL 
-* [cite_start]**Autenticação/Autorização:** Keycloak (SSO) 
+* **Backend:** Java (Spring Boot)
+* **Frontend:** Vue.js
+* **Banco de Dados:** PostgreSQL
+* **Autenticação/Autorização:** Keycloak (SSO)
 * **Containerização:** Docker & Docker Compose
 
 ---
