@@ -2,18 +2,18 @@
 
 ## 📝 Descrição
 
-Este projeto é um sistema web completo (SaaS - Software as a Service) para gerenciar o controle de entrada e saída de equipamentos de TI. Ele permite o cadastro de usuários, equipamentos, o registro de movimentações e a geração de termos de responsabilidade.
+[cite_start]Este projeto é um sistema web completo (SaaS - Software as a Service) para gerenciar o controle de entrada e saída de equipamentos de TI.  [cite_start]Ele permite o cadastro de usuários, equipamentos, o registro de movimentações e a geração de termos de responsabilidade. 
 
 ---
 
 ## ✨ Funcionalidades Principais
 
-* **Gerenciamento de Equipamentos:** CRUD completo (Criar, Ler, Atualizar, Deletar) para os ativos de TI.
-* **Gerenciamento de Usuários:** CRUD completo para os funcionários/usuários da aplicação.
-* **Controle de Movimentações:** Registro de entrada (devolução) e saída (alocação, reparo) de equipamentos, vinculando um equipamento a um usuário.
-* **Geração de Termos:** Emissão de um Termo de Responsabilidade em PDF para cada movimentação.
-* **Relatórios:** Visualização de equipamentos por status (Disponível, Em Reparo) e por usuário alocado.
-* **Autenticação e Autorização:** Sistema de segurança robusto com Single Sign-On (SSO) via Keycloak, com controle de acesso baseado em perfis (Admin vs. Usuário).
+* [cite_start]**Gerenciamento de Equipamentos:** CRUD completo (Criar, Ler, Atualizar, Deletar) para os ativos de TI. 
+* [cite_start]**Gerenciamento de Usuários:** CRUD completo para os funcionários/usuários da aplicação. 
+* [cite_start]**Controle de Movimentações:** Registro de entrada (devolução) e saída (alocação, reparo) de equipamentos, vinculando um equipamento a um usuário. 
+* [cite_start]**Geração de Termos:** Emissão de um Termo de Responsabilidade em PDF para cada movimentação. 
+* [cite_start]**Relatórios:** Visualização de equipamentos por status (Disponível, Em Reparo) e por usuário alocado. 
+* [cite_start]**Autenticação e Autorização:** Sistema de segurança robusto com Single Sign-On (SSO) via Keycloak, com controle de acesso baseado em perfis (Admin vs. Usuário). 
 
 ---
 
@@ -21,10 +21,10 @@ Este projeto é um sistema web completo (SaaS - Software as a Service) para gere
 
 O sistema é construído sobre uma arquitetura de microsserviços e contêineres, utilizando as seguintes tecnologias:
 
-* **Backend:** Java 17, Spring Boot 3
-* **Frontend:** Vue.js 3, Vuetify 3, Vue Router
-* **Banco de Dados:** PostgreSQL
-* **Autenticação/Autorização:** Keycloak
+* [cite_start]**Backend:** Java 17, Spring Boot 3 
+* [cite_start]**Frontend:** Vue.js 3, Vuetify 3, Vue Router 
+* [cite_start]**Banco de Dados:** PostgreSQL 
+* [cite_start]**Autenticação/Autorização:** Keycloak 
 * **Containerização:** Docker & Docker Compose
 
 ---
@@ -39,41 +39,35 @@ Com o Docker e o Docker Compose instalados, o ambiente completo pode ser iniciad
 * [Docker Compose](https://docs.docker.com/compose/install/) (geralmente já vem com o Docker Desktop)
 * [Maven](https://maven.apache.org/download.cgi) (para construir o backend a primeira vez)
 * [Node.js e npm](https://nodejs.org/en/) (para construir o frontend a primeira vez)
+* `make` (padrão no macOS e Linux)
 
-### Passos para a Primeira Execução
+### Passos para a Primeira Execução com Makefile (Recomendado)
 
-1.  **Construir a Imagem Docker do Backend:**
+A forma mais simples de gerenciar o ambiente é usando os comandos `make` a partir da pasta raiz do projeto.
+
+1.  **Construir Imagens e Iniciar o Ambiente:**
+    * Este comando único irá construir as imagens do backend e do frontend e depois iniciar todos os contêineres.
     ```bash
-    cd asset-control-system-backend
-    mvn clean package -DskipTests
-    docker build -t asset-control-backend:latest .
-    cd ..
+    make up
     ```
 
-2.  **Construir a Imagem Docker do Frontend:**
+2.  **Ver os Logs:**
+    * Para acompanhar os logs de todos os serviços em tempo real:
     ```bash
-    cd asset-control-system-frontend
-    docker build -t asset-control-frontend:latest .
-    cd ..
+    make logs
     ```
 
-3.  **Iniciar Todos os Serviços com Docker Compose:**
-    * Certifique-se de que você está na pasta raiz onde o arquivo `docker-compose.yml` se encontra.
+3.  **Parar Todos os Serviços:**
+    * Para parar todos os contêineres:
     ```bash
-    docker-compose up -d
-    ```
-    O `-d` executa os contêineres em segundo plano. Para ver os logs, você pode usar `docker-compose logs -f`.
-
-4.  **Parar Todos os Serviços:**
-    ```bash
-    docker-compose down
+    make down
     ```
 
 ---
 
 ## 🔗 URLs de Acesso e Credenciais
 
-Após iniciar o ambiente com `docker-compose up`, os serviços estarão acessíveis nas seguintes URLs:
+Após iniciar o ambiente, os serviços estarão acessíveis nas seguintes URLs:
 
 * **Aplicação Frontend:** [http://localhost:8082](http://localhost:8082)
 * **Documentação da API (Swagger UI):** [http://localhost:8081/swagger-ui.html](http://localhost:8081/swagger-ui.html)
@@ -94,8 +88,11 @@ Após iniciar o ambiente com `docker-compose up`, os serviços estarão acessív
 
 ---
 
-## 📂 Estrutura do Projeto
+## 📂 Estrutura e Documentação Específica
 
-* **/asset-control-system-backend**: Contém o código-fonte da API backend em Java/Spring Boot.
-* **/asset-control-system-frontend**: Contém o código-fonte da interface de usuário em Vue.js.
+Para detalhes sobre como executar ou testar cada parte do sistema individualmente, consulte os arquivos README dentro de cada pasta.
+
+* **/asset-control-system-backend**: Contém o código-fonte da API backend. O `README.md` interno possui detalhes sobre os endpoints e como testar a API.
+* **/asset-control-system-frontend**: Contém o código-fonte da interface de usuário. O `README.md` interno possui detalhes sobre os comandos de desenvolvimento do frontend.
 * **docker-compose.yml**: Arquivo de orquestração para todos os serviços.
+* **Makefile**: Atalhos para os comandos de build e execução do ambiente.
